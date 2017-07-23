@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var cool = require('cool-ascii-faces');
+var TIMES = process.env.TIMES || 5;
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -16,6 +17,17 @@ app.get('/', function(request, response) {
 
 app.get('/cool', function(request, response) {
   response.send(cool());
+});
+
+app.get('/times', function(request, response) {
+  var result = '';
+  var i;
+  
+  for (i = 0; i < TIMES; i++) {
+    result += i + ' ';
+  }
+
+  response.send(result);
 });
 
 app.listen(app.get('port'), function() {
